@@ -1,0 +1,5 @@
+# Command to install codegen on Mac
+brew install swagger-codegen 
+
+# Command to execute codegen on mac
+swagger-codegen generate -i https://localhost:3000/hands-on-store/1.0.0/Swagger.json -l ruby -o /tmp/test/
