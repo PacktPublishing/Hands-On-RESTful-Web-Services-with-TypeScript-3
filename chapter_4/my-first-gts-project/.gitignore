@@ -4,3 +4,4 @@ dist/
 reports/
 .nyc_output/
 .DS_Store
+package-lock.json
