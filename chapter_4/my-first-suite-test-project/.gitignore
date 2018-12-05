@@ -1,3 +1,7 @@
 node_modules/
 .vscode
 .package-lock.json
+.stryker-tmp/
+reports/
+src/*.js
+test/*.js

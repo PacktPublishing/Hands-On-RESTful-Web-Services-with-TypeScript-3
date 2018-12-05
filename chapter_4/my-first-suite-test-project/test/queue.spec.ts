@@ -20,4 +20,8 @@ describe('Stack', () => {
         const s = new Queue<number>([ 1, 2, 3, 4 ]);
         expect(s.pop()).to.equal(1);
     });
+    it('should check if the queue is empty when there is no data there', () => {
+        const s = new Queue<number>([ ]);
+        expect(s.isEmpty()).to.equal(true);
+    });
 });

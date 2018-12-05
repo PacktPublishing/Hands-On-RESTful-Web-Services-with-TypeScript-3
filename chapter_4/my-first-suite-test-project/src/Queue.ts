@@ -15,7 +15,7 @@ export class Queue<T> {
     }
 
     isEmpty(): boolean {
-        return this._store.length === 0;
+        return this.size() === 0;
     }
 
     size(): number {
