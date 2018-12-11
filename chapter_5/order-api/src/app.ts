@@ -1,27 +1,16 @@
-import * as express from "express";
-import * as bodyParser from "body-parser"; //used to parse the form data that you pass in the request
-import { Index } from "../src/routes/index";
+import * as bodyParser from 'body-parser' // used to parse the form data that you pass in the request
+import * as express from 'express'
+import { Index } from '../src/routes/index'
 
 class App {
-  public app: express.Application;
-  public indexRoutes: Index = new Index();
+  public app: express.Application
+  public indexRoutes: Index = new Index()
 
   constructor() {
-    this.app = express(); //run the express instance and store in app
-    this.config();
-    this.indexRoutes.routes(this.app);
-  }
-
-  private config(): void {
-    // support application/json type post data
-    this.app.use(bodyParser.json());
-    //support application/x-www-form-urlencoded post data
-    this.app.use(
-      bodyParser.urlencoded({
-        extended: false
-      })
-    );
+    this.app = express() // run the express instance and store in app
+    this.app.use(bodyParser.json())
+    this.indexRoutes.routes(this.app)
   }
 }
 
-export default new App().app;
+export default new App().app
