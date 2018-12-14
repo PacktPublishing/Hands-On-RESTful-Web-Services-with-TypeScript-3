@@ -9,13 +9,6 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-describe('Stack', () => {
-  it('should be able to be initialized without an initializer', async () => {
-    const s = 10
-    expect(s).to.equal(10)
-  })
-})
-
 describe('baseRoute', () => {
   it('should respond with HTTP 200 status', async () => {
     return chai
