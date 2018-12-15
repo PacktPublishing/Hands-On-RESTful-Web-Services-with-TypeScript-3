@@ -1,6 +1,9 @@
 openapi: 3.0.0
 
 servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/biharck/hands-on/1.0.0
   - description: The server description
     url: https://localhost:3000/hands-on-store/1.0.0
 info:
@@ -10,12 +13,12 @@ info:
     [http://Swagger.io](http://Swagger.io)
   version: "1.0.0"
   title: Swagger store
-  termsOfService: 'http://Swagger.io/terms/'
+  termsOfService: "http://Swagger.io/terms/"
   contact:
     email: biharck@gmail.com
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 tags:
   - name: store
     description: Access to store orders
@@ -23,17 +26,17 @@ tags:
     description: Operations about user
     externalDocs:
       description: Find out more about our store
-      url: 'http://Swagger.io'
+      url: "http://Swagger.io"
 paths:
   /store/inventory:
     get:
       tags:
         - store
-      summary: Returns pet inventories from the store
+      summary: Returns user inventories from the store
       description: Returns a map of status codes to quantities
       operationId: getInventory
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
@@ -42,40 +45,40 @@ paths:
                 additionalProperties:
                   type: integer
                   format: int32
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
       security:
         - bearerAuth: []
   /store/orders:
     post:
       tags:
         - store
-      summary: Place an order for a pet
+      summary: Place an order for a user
       operationId: placeOrder
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: "#/components/schemas/Order"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Order'
-        '400':
+                $ref: "#/components/schemas/Order"
+        "400":
           description: Invalid Order
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
       security:
         - bearerAuth: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
-        description: order placed for purchasing the pet
+              $ref: "#/components/schemas/Order"
+        description: order placed for purchasing the user
         required: true
-  '/store/orders/{orderId}':
+  "/store/orders/{orderId}":
     get:
       tags:
         - store
@@ -87,7 +90,7 @@ paths:
       parameters:
         - name: orderId
           in: path
-          description: ID of pet that needs to be fetched
+          description: ID of user that needs to be fetched
           required: true
           schema:
             type: integer
@@ -95,20 +98,20 @@ paths:
             minimum: 1
             maximum: 10
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: "#/components/schemas/Order"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Order'
-        '400':
+                $ref: "#/components/schemas/Order"
+        "400":
           description: Invalid ID supplied
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
           description: Order not found
       security:
         - bearerAuth: []
@@ -130,11 +133,11 @@ paths:
             format: int64
             minimum: 1
       responses:
-        '400':
+        "400":
           description: Invalid ID supplied
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
           description: Order not found
       security:
         - bearerAuth: []
@@ -148,15 +151,15 @@ paths:
       responses:
         default:
           description: successful operation
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
       security:
         - bearerAuth: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
         description: Created user object
         required: true
   /users/login:
@@ -179,7 +182,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: successful operation
           headers:
             X-Rate-Limit:
@@ -199,7 +202,7 @@ paths:
             application/xml:
               schema:
                 type: string
-        '400':
+        "400":
           description: Invalid username/password supplied
   /users/logout:
     get:
@@ -210,7 +213,7 @@ paths:
       responses:
         default:
           description: successful operation
-  '/users/{username}':
+  "/users/{username}":
     get:
       tags:
         - user
@@ -224,20 +227,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
             application/xml:
               schema:
-                $ref: '#/components/schemas/User'
-        '400':
+                $ref: "#/components/schemas/User"
+        "400":
           description: Invalid username supplied
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
           description: User not found
       security:
         - bearerAuth: []
@@ -255,11 +258,11 @@ paths:
           schema:
             type: string
       responses:
-        '400':
+        "400":
           description: Invalid user supplied
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
           description: User not found
       security:
         - bearerAuth: []
@@ -267,7 +270,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
         description: Updated user object
         required: true
     delete:
@@ -284,17 +287,17 @@ paths:
           schema:
             type: string
       responses:
-        '400':
+        "400":
           description: Invalid username supplied
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
           description: User not found
       security:
         - bearerAuth: []
 externalDocs:
   description: Find out more about Swagger
-  url: 'http://Swagger.io'
+  url: "http://Swagger.io"
 components:
   responses:
     UnauthorizedError:
@@ -306,7 +309,7 @@ components:
         id:
           type: integer
           format: int64
-        petId:
+        userId:
           type: integer
           format: int64
         quantity:
@@ -351,7 +354,7 @@ components:
           description: User Status
       xml:
         name: User
-  
+
   securitySchemes:
     bearerAuth: # arbitrary name for the security scheme
       type: http
