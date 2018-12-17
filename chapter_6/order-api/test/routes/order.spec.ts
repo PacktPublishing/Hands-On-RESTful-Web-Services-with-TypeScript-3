@@ -25,7 +25,7 @@ describe('userRoute', () => {
   it('should respond with HTTP 404 status because there is no order', async () => {
     return chai
       .request(app)
-      .get(`/users/${order.id}`)
+      .get(`/store/orders/${order.id}`)
       .then(res => {
         expect(res.status).to.be.equal(404)
       })

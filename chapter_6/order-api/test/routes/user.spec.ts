@@ -13,10 +13,10 @@ const expect = chai.expect
 const user: User = {
   // generic random value from 1 to 100 only for tests so far
   id: Math.floor(Math.random() * 100) + 1,
-  username: 'Jhon',
-  firstName: 'Jhon',
+  username: 'John',
+  firstName: 'John',
   lastName: 'Doe',
-  email: 'jhon@myemail.com',
+  email: 'John@myemail.com',
   password: 'password',
   phone: '5555555',
   userStatus: 1,
@@ -50,18 +50,18 @@ describe('userRoute', () => {
         expect(res.body.username).to.be.equal(user.username)
       })
   })
-  it('should updated the user Jhon', async () => {
-    user.username = 'Jhon Updated'
-    user.firstName = 'Jhon Updated'
+  it('should updated the user John', async () => {
+    user.username = 'John Updated'
+    user.firstName = 'John Updated'
     user.lastName = 'Doe Updated'
-    user.email = 'jhon@myemail_updated.com'
+    user.email = 'John@myemail_updated.com'
     user.password = 'password Updated'
     user.phone = '3333333'
     user.userStatus = 12
 
     return chai
       .request(app)
-      .patch(`/users/Jhon`)
+      .patch(`/users/John`)
       .send(user)
       .then(res => {
         expect(res.status).to.be.equal(204)
