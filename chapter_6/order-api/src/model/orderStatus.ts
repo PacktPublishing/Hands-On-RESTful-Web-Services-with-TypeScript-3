@@ -1,7 +1,7 @@
 'use strict'
 
-enum OrderStatus {
-  placed,
-  approved,
-  delivered,
+export enum OrderStatus {
+  Placed = 'PLACED',
+  Approved = 'APPROVED',
+  Delivered = 'DELIVERED',
 }

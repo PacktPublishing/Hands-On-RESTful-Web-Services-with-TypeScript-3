@@ -1,13 +1,10 @@
-'use strict'
+import { OrderStatus } from './orderStatus'
 
-import './orderStatus'
-
-export interface Order {
+export default interface Order {
   id: Number
   userId: Number
   quantity: Number
   shipDate: Date
-  status: String
-  orderStatus: OrderStatus
+  status: OrderStatus
   complete: Boolean
 }
