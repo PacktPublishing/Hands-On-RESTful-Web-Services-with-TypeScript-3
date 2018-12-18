@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import * as _ from 'lodash'
-import { default as Order } from '../model/order'
-import { OrderStatus } from '../model/orderStatus'
+import { default as Order } from '../models/order'
+import { OrderStatus } from '../models/orderStatus'
 
 let orders: Array<Order> = []
 

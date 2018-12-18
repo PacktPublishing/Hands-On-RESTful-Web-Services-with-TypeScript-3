@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { default as User } from '../model/User'
+import { default as User } from '../models/User'
 
 let users: Array<User> = []
 

@@ -4,8 +4,8 @@ import * as chai from 'chai'
 import chaiHttp = require('chai-http')
 import 'mocha'
 import app from '../../src/app'
-import Order from '../../src/model/Order'
-import { OrderStatus } from '../../src/model/orderStatus'
+import Order from '../../src/models/Order'
+import { OrderStatus } from '../../src/models/orderStatus'
 
 chai.use(chaiHttp)
 

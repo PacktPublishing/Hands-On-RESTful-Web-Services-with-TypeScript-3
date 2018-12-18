@@ -1,4 +1,4 @@
-import * as orderController from '../controller/order'
+import * as orderController from '../controllers/order'
 
 export class OrderRoute {
   public routes(app): void {
