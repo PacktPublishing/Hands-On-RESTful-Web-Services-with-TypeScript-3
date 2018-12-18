@@ -52,6 +52,24 @@ describe('userRoute', () => {
         expect(res.body.status).to.be.equal(order.status)
       })
   })
+  it('should return all orders so far', async () => {
+    return chai
+      .request(app)
+      .get(`/store/orders`)
+      .then(res => {
+        expect(res.status).to.be.equal(200)
+        expect(res.body.length).to.be.equal(1)
+      })
+  })
+  it('should not return orders because offset is higher than the size of the orders array', async () => {
+    return chai
+      .request(app)
+      .get(`/store/orders?offset=2&limit=2`)
+      .then(res => {
+        expect(res.status).to.be.equal(200)
+        expect(res.body.length).to.be.equal(0)
+      })
+  })
   it('should return the inventory for all users', async () => {
     return chai
       .request(app)

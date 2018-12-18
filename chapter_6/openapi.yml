@@ -50,6 +50,26 @@ paths:
       security:
         - bearerAuth: []
   /store/orders:
+    get:
+      tags:
+        - store
+      summary: Returns orders
+      description: Returns the orders
+      operationId: getOrder
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int32
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+      security:
+        - bearerAuth: []
     post:
       tags:
         - store

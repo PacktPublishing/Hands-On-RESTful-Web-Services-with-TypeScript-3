@@ -12,6 +12,17 @@ export let getOrder = (req: Request, res: Response, next: NextFunction) => {
   return res.status(httpStatusCode).send(order)
 }
 
+export let getAllOrders = (req: Request, res: Response, next: NextFunction) => {
+  const limit = req.query.limit || orders.length
+  const offset = req.query.offset || 0
+  return res.status(200).send(
+    _(orders)
+      .drop(offset)
+      .take(limit)
+      .value()
+  )
+}
+
 export let addOrder = (req: Request, res: Response, next: NextFunction) => {
   const order: Order = {
     // generic random value from 1 to 100 only for tests so far
@@ -40,6 +51,12 @@ export let removeOrder = (req: Request, res: Response, next: NextFunction) => {
 }
 
 export let getInventory = (req: Request, res: Response, next: NextFunction) => {
-  const grouppedOrders = _.groupBy(orders, 'userId')
+  const status = req.query.status
+  let inventoryOrders = orders
+  if (status) {
+    inventoryOrders = inventoryOrders.filter(item => item.status === status)
+  }
+
+  const grouppedOrders = _.groupBy(inventoryOrders, 'userId')
   return res.status(200).send(grouppedOrders)
 }
