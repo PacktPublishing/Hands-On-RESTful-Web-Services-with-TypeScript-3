@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
 import { default as User } from '../models/User'
-import { formatOutput } from '../utility/orderApiUtility'
 
 let users: Array<User> = []
 
@@ -8,8 +7,7 @@ export let getUser = (req: Request, res: Response, next: NextFunction) => {
   const username = req.params.username
   const user = users.find(obj => obj.username === username)
   const httpStatusCode = user ? 200 : 404
-
-  return formatOutput(res, user, httpStatusCode, 'user')
+  return res.status(httpStatusCode).send(user)
 }
 
 export let addUser = (req: Request, res: Response, next: NextFunction) => {
@@ -25,7 +23,7 @@ export let addUser = (req: Request, res: Response, next: NextFunction) => {
     userStatus: 1,
   }
   users.push(user)
-  return formatOutput(res, user, 201, 'user')
+  return res.status(201).send(user)
 }
 
 export let updateUser = (req: Request, res: Response, next: NextFunction) => {
@@ -46,7 +44,7 @@ export let updateUser = (req: Request, res: Response, next: NextFunction) => {
   user.userStatus = req.body.userStatus || user.userStatus
 
   users[userIndex] = user
-  return formatOutput(res, {}, 204)
+  return res.status(204).send()
 }
 
 export let removeUser = (req: Request, res: Response, next: NextFunction) => {
@@ -58,5 +56,6 @@ export let removeUser = (req: Request, res: Response, next: NextFunction) => {
   }
 
   users = users.filter(item => item.username !== username)
-  return formatOutput(res, {}, 204)
+
+  return res.status(204).send()
 }
