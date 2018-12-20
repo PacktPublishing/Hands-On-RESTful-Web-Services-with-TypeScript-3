@@ -9,7 +9,9 @@ export let getUser = (req: Request, res: Response, next: NextFunction) => {
   const username = req.params.username
   let user = users.find(obj => obj.username === username)
   const httpStatusCode = user ? 200 : 404
-  user = halson(user).addLink('self', `/users/${user.id}`)
+  if (user) {
+    user = halson(user).addLink('self', `/users/${user.id}`)
+  }
   return formatOutput(res, user, httpStatusCode, 'user')
 }
 
