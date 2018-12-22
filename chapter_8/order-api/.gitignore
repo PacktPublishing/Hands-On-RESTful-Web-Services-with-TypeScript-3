@@ -5,3 +5,4 @@ package-lock.json
 dist
 .stryker-tmp
 reports
+launch.json
