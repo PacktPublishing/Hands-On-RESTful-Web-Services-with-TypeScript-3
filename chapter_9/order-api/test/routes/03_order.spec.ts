@@ -3,7 +3,6 @@
 import * as chai from 'chai'
 import chaiHttp = require('chai-http')
 import 'mocha'
-import * as mongoose from 'mongoose'
 import app from '../../src/app'
 import { OrderStatus } from '../../src/models/orderStatus'
 import { OrderModel } from '../../src/schemas/order'
@@ -12,26 +11,38 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const order = {
-  userId: 20,
-  quantity: 1,
-  shipDate: new Date(),
-  status: OrderStatus.Placed,
-  complete: false,
-}
-
-let orderIdCreated
-
 describe('userRoute', () => {
+  const order = {
+    userId: 20,
+    quantity: 1,
+    shipDate: new Date(),
+    status: OrderStatus.Placed,
+    complete: false,
+  }
+
+  let orderIdCreated
+  let token
+
   before(async () => {
     expect(OrderModel.modelName).to.be.equal('Order')
     OrderModel.collection.drop()
+  })
+
+  it('should be able to login and get the token to be used on orders requests', async () => {
+    return chai
+      .request(app)
+      .get('/users/login?username=John&password=password')
+      .then(res => {
+        expect(res.status).to.be.equal(200)
+        token = res.body.token
+      })
   })
 
   it('should respond with HTTP 404 status because there is no order', async () => {
     return chai
       .request(app)
       .get(`/store/orders/000`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(404)
       })
@@ -50,6 +61,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .post('/users')
+      .set('Authorization', `Bearer ${token}`)
       .send(user)
       .then(res => {
         expect(res.status).to.be.equal(201)
@@ -62,6 +74,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .post(`/store/orders`)
+      .set('Authorization', `Bearer ${token}`)
       .send(order)
       .then(res => {
         expect(res.status).to.be.equal(201)
@@ -74,6 +87,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .get(`/store/orders/${orderIdCreated}`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(200)
         expect(res.body._id).to.be.equal(orderIdCreated)
@@ -84,6 +98,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .get(`/store/orders`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(200)
         expect(res.body.length).to.be.equal(1)
@@ -93,6 +108,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .get(`/store/orders?offset=2&limit=2`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(200)
         expect(res.body.length).to.be.equal(0)
@@ -102,6 +118,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .get(`/store/inventory?status=PLACED`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(200)
         expect(res.body[order.userId].length).to.be.equal(1)
@@ -111,6 +128,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .del(`/store/orders/${orderIdCreated}`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(204)
       })
@@ -119,6 +137,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .del(`/store/orders/${orderIdCreated}`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(404)
       })

@@ -1,5 +1,5 @@
 'use strict'
-
+import * as bcrypt from 'bcrypt'
 import * as chai from 'chai'
 import chaiHttp = require('chai-http')
 import 'mocha'
@@ -10,25 +10,47 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const user = {
-  username: 'John',
-  firstName: 'John',
-  lastName: 'Doe',
-  email: 'John@myemail.com',
-  password: 'password',
-  phone: '5555555',
-  userStatus: 1,
-}
-
 describe('userRoute', () => {
+  const user = {
+    _id: null,
+    username: 'John',
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'John@myemail.com',
+    password: 'password',
+    phone: '5555555',
+    userStatus: 1,
+  }
+
+  let token
+
   before(async () => {
     expect(UserModel.modelName).to.be.equal('User')
     UserModel.collection.drop()
+    const newUser = new UserModel(user)
+
+    newUser.password = bcrypt.hashSync(newUser.password, 10)
+
+    await newUser.save((error, userCreated) => {
+      user._id = userCreated._id
+    })
   })
+
+  it('should be able to login', async () => {
+    return chai
+      .request(app)
+      .get(`/users/login?username=${user.username}&password=${user.password}`)
+      .then(res => {
+        expect(res.status).to.be.equal(200)
+        token = res.body.token
+      })
+  })
+
   it('should respond with HTTP 404 status because there is no user', async () => {
     return chai
       .request(app)
-      .get(`/users/${user.username}`)
+      .get(`/users/NO_USER`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(404)
       })
@@ -37,6 +59,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .post('/users')
+      .set('Authorization', `Bearer ${token}`)
       .send(user)
       .then(res => {
         expect(res.status).to.be.equal(201)
@@ -47,6 +70,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .get(`/users/${user.username}`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(200)
         expect(res.body.username).to.be.equal(user.username)
@@ -64,6 +88,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .patch(`/users/John`)
+      .set('Authorization', `Bearer ${token}`)
       .send(user)
       .then(res => {
         expect(res.status).to.be.equal(204)
@@ -73,6 +98,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .get(`/users/${user.username}`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(200)
         expect(res.body.username).to.be.equal(user.username)
@@ -90,6 +116,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .patch(`/users/Mary`)
+      .set('Authorization', `Bearer ${token}`)
       .send(user)
       .then(res => {
         expect(res.status).to.be.equal(404)
@@ -99,6 +126,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .del(`/users/${user.username}`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(204)
       })
@@ -107,6 +135,7 @@ describe('userRoute', () => {
     return chai
       .request(app)
       .del(`/users/Mary`)
+      .set('Authorization', `Bearer ${token}`)
       .then(res => {
         expect(res.status).to.be.equal(404)
       })

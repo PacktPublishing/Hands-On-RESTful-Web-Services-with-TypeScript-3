@@ -1,5 +1,7 @@
+import * as bcrypt from 'bcrypt'
 import { NextFunction, Request, Response } from 'express'
 import * as halson from 'halson'
+import * as jwt from 'jsonwebtoken'
 import { UserModel } from '../schemas/User'
 import { formatOutput } from '../utility/orderApiUtility'
 
@@ -21,6 +23,8 @@ export let getUser = (req: Request, res: Response, next: NextFunction) => {
 
 export let addUser = (req: Request, res: Response, next: NextFunction) => {
   const newUser = new UserModel(req.body)
+
+  newUser.password = bcrypt.hashSync(newUser.password, 10)
 
   newUser.save((error, user) => {
     user = halson(user.toJSON()).addLink('self', `/users/${user._id}`)
@@ -61,5 +65,28 @@ export let removeUser = (req: Request, res: Response, next: NextFunction) => {
     user.remove(error => {
       res.status(204).send()
     })
+  })
+}
+
+export let login = (req: Request, res: Response, next: NextFunction) => {
+  const username = req.query.username
+  const password = req.query.password
+
+  UserModel.findOne({ username: username }, (err, user) => {
+    if (!user) {
+      return res.status(404).send()
+    }
+
+    const validate = bcrypt.compareSync(password, user.password.valueOf())
+
+    if (validate) {
+      const body = { _id: user._id, email: user.email }
+
+      const token = jwt.sign({ user: body }, 'top_secret')
+
+      return res.json({ token: token })
+    } else {
+      return res.status(401).send()
+    }
   })
 }
