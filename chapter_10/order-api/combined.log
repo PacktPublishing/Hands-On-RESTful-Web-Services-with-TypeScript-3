@@ -39,3 +39,64 @@ error: 6 *** error
 [2018-12-23T04:51:13.296Z] [error] => Order not found.
 [2018-12-23T04:51:54.852Z] [info] => [GET] [/store/orders/] 5c1eee5cabc91f4b3f74dd7es
 [2018-12-23T04:51:54.935Z] [error] => Order 5c1eee5cabc91f4b3f74dd7es not found.
+[2018-12-23T04:58:00.888Z] [info] => [GET] [/users/login] John
+[2018-12-23T05:00:40.766Z] [info] => [GET] [/users/login] John
+[2018-12-23T05:00:40.991Z] [info] => [GET] [/users] NO_USER
+[2018-12-23T05:00:41.079Z] [info] => [POST] [/users] { _id: null,
+  username: 'John',
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'John@myemail.com',
+  password: 'password',
+  phone: '5555555',
+  userStatus: 1 }
+[2018-12-23T05:00:41.239Z] [info] => [GET] [/users] John
+[2018-12-23T05:00:41.246Z] [info] => [PATCH] [/users] John
+[2018-12-23T05:00:41.263Z] [info] => [GET] [/users] John_Updated
+[2018-12-23T05:00:41.269Z] [info] => [PATCH] [/users] Mary
+[2018-12-23T05:00:41.277Z] [warn] => [DELETE] [/users] John_Updated
+[2018-12-23T05:00:41.290Z] [warn] => [DELETE] [/users] Mary
+[2018-12-23T05:00:41.299Z] [info] => [GET] [/users/login] John
+[2018-12-23T05:00:41.419Z] [info] => [GET] [/store/orders/] 000
+[2018-12-23T05:00:41.453Z] [error] => Order 000 not found.
+[2018-12-23T05:01:51.038Z] [info] => [GET] [/users/login] John
+[2018-12-23T05:02:05.655Z] [info] => [GET] [/users/login] John
+[2018-12-23T05:02:05.771Z] [info] => [GET] [/users] NO_USER
+[2018-12-23T05:02:05.801Z] [info] => [POST] [/users] { _id: null,
+  username: 'John',
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'John@myemail.com',
+  password: 'password',
+  phone: '5555555',
+  userStatus: 1 }
+[2018-12-23T05:02:05.887Z] [info] => [GET] [/users] John
+[2018-12-23T05:02:05.893Z] [info] => [PATCH] [/users] John
+[2018-12-23T05:02:05.905Z] [info] => [GET] [/users] John_Updated
+[2018-12-23T05:02:05.910Z] [info] => [PATCH] [/users] Mary
+[2018-12-23T05:02:05.919Z] [warn] => [DELETE] [/users] John_Updated
+[2018-12-23T05:02:05.929Z] [warn] => [DELETE] [/users] Mary
+[2018-12-23T05:02:05.945Z] [info] => [GET] [/users/login] John
+[2018-12-23T05:02:06.028Z] [info] => [GET] [/store/orders/] 000
+[2018-12-23T05:02:06.044Z] [error] => Order 000 not found.
+[2018-12-23T05:02:06.053Z] [info] => [POST] [/users] { _id: 5c1f16ceb9e36c0a7340ef4b,
+  username: 'OrderUser',
+  firstName: 'Order',
+  lastName: 'User',
+  email: 'order@myemail.com',
+  password: 'password',
+  phone: '5555555',
+  userStatus: 1 }
+[2018-12-23T05:02:06.143Z] [info] => [POST] [/store/orders/] 5c1f16ceb9e36c0a7340ef4b
+[2018-12-23T05:02:06.147Z] [info] => [POST] [/store/orders/] { _id: 5c1f16ceb9e36c0a7340ef4c,
+  userId: 5c1f16ceb9e36c0a7340ef4b,
+  quantity: 1,
+  shipDate: 2018-12-23T05:02:05.459Z,
+  status: 'PLACED',
+  complete: false }
+[2018-12-23T05:02:06.172Z] [info] => [GET] [/store/orders/] 5c1f16ceb9e36c0a7340ef4c
+[2018-12-23T05:02:06.178Z] [info] => [GET] [/store/orders/]
+[2018-12-23T05:02:06.189Z] [info] => [GET] [/store/orders/]
+[2018-12-23T05:02:06.199Z] [info] => [POST] [/store/inventory/] PLACED
+[2018-12-23T05:02:06.206Z] [warn] => [DELETE] [/store/orders/] 5c1f16ceb9e36c0a7340ef4c
+[2018-12-23T05:02:06.219Z] [warn] => [DELETE] [/store/orders/] 5c1f16ceb9e36c0a7340ef4c
