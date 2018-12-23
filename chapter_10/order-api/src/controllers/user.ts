@@ -3,10 +3,13 @@ import { NextFunction, Request, Response } from 'express'
 import * as halson from 'halson'
 import * as jwt from 'jsonwebtoken'
 import { UserModel } from '../schemas/User'
+import { OrderAPILogger } from '../utility/logger'
 import { formatOutput } from '../utility/orderApiUtility'
 
 export let getUser = (req: Request, res: Response, next: NextFunction) => {
   const username = req.params.username
+
+  OrderAPILogger.logger.info(`[GET] [/users] ${username}`)
 
   UserModel.findOne({ username: username }, (err, user) => {
     if (!user) {
@@ -24,6 +27,8 @@ export let getUser = (req: Request, res: Response, next: NextFunction) => {
 export let addUser = (req: Request, res: Response, next: NextFunction) => {
   const newUser = new UserModel(req.body)
 
+  OrderAPILogger.logger.info(`[POST] [/users] ${newUser}`)
+
   newUser.password = bcrypt.hashSync(newUser.password, 10)
 
   newUser.save((error, user) => {
@@ -34,6 +39,8 @@ export let addUser = (req: Request, res: Response, next: NextFunction) => {
 
 export let updateUser = (req: Request, res: Response, next: NextFunction) => {
   const username = req.params.username
+
+  OrderAPILogger.logger.info(`[PATCH] [/users] ${username}`)
 
   UserModel.findOne({ username: username }, (err, user) => {
     if (!user) {
@@ -57,6 +64,8 @@ export let updateUser = (req: Request, res: Response, next: NextFunction) => {
 export let removeUser = (req: Request, res: Response, next: NextFunction) => {
   const username = req.params.username
 
+  OrderAPILogger.logger.warn(`[DELETE] [/users] ${username}`)
+
   UserModel.findOne({ username: username }, (err, user) => {
     if (!user) {
       return res.status(404).send()
@@ -71,6 +80,8 @@ export let removeUser = (req: Request, res: Response, next: NextFunction) => {
 export let login = (req: Request, res: Response, next: NextFunction) => {
   const username = req.query.username
   const password = req.query.password
+
+  OrderAPILogger.logger.info(`[GET] [/users/login] ${username}`)
 
   UserModel.findOne({ username: username }, (err, user) => {
     if (!user) {

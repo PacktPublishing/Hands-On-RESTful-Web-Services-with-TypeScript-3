@@ -1,0 +1,41 @@
+info: 1 *** infomational
+info: 1 *** infomational
+warn: 2 *** warning
+error: 3 *** erroe
+info: 4 *** informational
+warn: 5 *** warning
+error: 6 *** error
+{"level":"info","message":"1 *** infomational"}
+{"level":"warn","message":"2 *** warning"}
+{"level":"error","message":"3 *** erroe"}
+{"message":"4 *** informational","level":"info"}
+{"message":"5 *** warning","level":"warn"}
+{"message":"6 *** error","level":"error"}
+2018-12-23T04:43:00.332Z info: 1 *** infomational
+2018-12-23T04:43:00.337Z warn: 2 *** warning
+2018-12-23T04:43:00.338Z error: 3 *** erroe
+2018-12-23T04:43:00.338Z info: 4 *** informational
+2018-12-23T04:43:00.338Z warn: 5 *** warning
+2018-12-23T04:43:00.338Z error: 6 *** error
+[2018-12-23T04:43:35.139Z] [info] => 1 *** infomational
+[2018-12-23T04:43:35.141Z] [warn] => 2 *** warning
+[2018-12-23T04:43:35.141Z] [error] => 3 *** erroe
+[2018-12-23T04:43:35.142Z] [info] => 4 *** informational
+[2018-12-23T04:43:35.142Z] [warn] => 5 *** warning
+[2018-12-23T04:43:35.142Z] [error] => 6 *** error
+[2018-12-23T04:43:35.963Z] [info] => 1 *** infomational
+[2018-12-23T04:43:35.963Z] [warn] => 2 *** warning
+[2018-12-23T04:43:35.963Z] [error] => 3 *** erroe
+[2018-12-23T04:43:35.963Z] [info] => 4 *** informational
+[2018-12-23T04:43:35.963Z] [warn] => 5 *** warning
+[2018-12-23T04:43:35.964Z] [error] => 6 *** error
+[2018-12-23T04:44:26.113Z] [info] => 1 *** infomational
+[2018-12-23T04:44:26.115Z] [warn] => 2 *** warning
+[2018-12-23T04:44:26.115Z] [error] => 3 *** erroe
+[2018-12-23T04:44:26.115Z] [info] => 4 *** informational
+[2018-12-23T04:44:26.115Z] [warn] => 5 *** warning
+[2018-12-23T04:44:26.116Z] [error] => 6 *** error
+[2018-12-23T04:51:13.211Z] [info] => [GET] [/store/orders/] 5c1eee5cabc91f4b3f74dd7es
+[2018-12-23T04:51:13.296Z] [error] => Order not found.
+[2018-12-23T04:51:54.852Z] [info] => [GET] [/store/orders/] 5c1eee5cabc91f4b3f74dd7es
+[2018-12-23T04:51:54.935Z] [error] => Order 5c1eee5cabc91f4b3f74dd7es not found.

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
+import { OrderAPILogger } from '../utility/logger'
 
 export let logging = (
   err: Error,
@@ -6,7 +7,7 @@ export let logging = (
   res: Response,
   next: NextFunction
 ) => {
-  console.error(err)
+  OrderAPILogger.logger.error(err)
   next(err)
 }
 
