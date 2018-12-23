@@ -1,6 +1,5 @@
 import { Document, Model, model, Schema } from 'mongoose'
 import { default as Order } from '../models/order'
-import { OrderStatus } from '../models/orderStatus'
 
 export interface OrderModel extends Order, Document {}
 
