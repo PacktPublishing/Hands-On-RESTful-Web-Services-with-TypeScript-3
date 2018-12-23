@@ -4,7 +4,6 @@ import * as chai from 'chai'
 import chaiHttp = require('chai-http')
 import 'mocha'
 import app from '../../src/app'
-import { OrderStatus } from '../../src/models/orderStatus'
 import { OrderModel } from '../../src/schemas/order'
 
 chai.use(chaiHttp)
@@ -16,7 +15,7 @@ describe('userRoute', () => {
     userId: 20,
     quantity: 1,
     shipDate: new Date(),
-    status: OrderStatus.Placed,
+    status: 'PLACED',
     complete: false,
   }
 
