@@ -1,0 +1,9 @@
+node_modules/
+package-lock.json
+.DS_Store
+package-lock.json
+dist
+.stryker-tmp
+reports
+launch.json
+*.pem
