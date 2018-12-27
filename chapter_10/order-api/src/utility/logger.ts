@@ -9,15 +9,14 @@ export class OrderAPILogger {
   public static logger = createLogger({
     level: 'info',
     format: combine(
-      label({ label: 'right meow!' }),
+      label({ label: 'order-api errors' }),
       timestamp(),
       OrderAPILogger.myFormat
     ),
 
     transports: [
-      new transports.File({ filename: 'combined.log' }),
+      new transports.File({ filename: 'aggregated.log' }),
       new transports.Console(),
     ],
   })
 }
-// https://chercher.tech/protractor/logging-winston-protractor

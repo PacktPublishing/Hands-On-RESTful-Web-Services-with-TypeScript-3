@@ -13,6 +13,9 @@ export let getOrder = (req: Request, res: Response, next: NextFunction) => {
 
   OrderModel.findById(id, (err, order) => {
     if (!order) {
+      OrderAPILogger.logger.info(
+        `[GET] [/store/orders/:{orderId}] Order ${id} not found.`
+      )
       return next(new Error(`Order ${id} not found.`))
     }
     order = halson(order.toJSON()).addLink('self', `/store/orders/${order.id}`)
@@ -47,7 +50,10 @@ export let addOrder = (req: Request, res: Response, next: NextFunction) => {
 
   UserModel.findById(userId, (err, user) => {
     if (!user) {
-      return res.status(404).send()
+      OrderAPILogger.logger.info(
+        `[POST] [/store/orders/] There is no user with the userId ${userId}`
+      )
+      throw new Error(`There is no user with the userId ${userId}`)
     }
 
     const newOrder = new OrderModel(req.body)
@@ -73,6 +79,9 @@ export let removeOrder = (req: Request, res: Response, next: NextFunction) => {
 
   OrderModel.findById(id, (err, order) => {
     if (!order) {
+      OrderAPILogger.logger.warn(
+        `[DELETE] [/store/orders/:{orderId}] Order id ${id} not found`
+      )
       return res.status(404).send()
     }
     order.remove(error => {
@@ -84,7 +93,7 @@ export let removeOrder = (req: Request, res: Response, next: NextFunction) => {
 export let getInventory = (req: Request, res: Response, next: NextFunction) => {
   const status = req.query.status
 
-  OrderAPILogger.logger.info(`[POST] [/store/inventory/] ${status}`)
+  OrderAPILogger.logger.info(`[GET] [/store/inventory/] ${status}`)
 
   OrderModel.find({ status: status }, (err, orders) => {
     orders = _.groupBy(orders, 'userId')

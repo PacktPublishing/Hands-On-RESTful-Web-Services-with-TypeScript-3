@@ -1,7 +1,7 @@
 {
   "name": "order-api",
   "version": "1.0.0",
-  "description": "This is the example from the Book Hands on RESTful Web Services with TypeScript 3",
+  "description": "This is the example from the Book Hands on RESTful APIs with TypeScript 3",
   "main": "./dist/server.js",
   "scripts": {
     "build": "npm run clean && tsc",
@@ -21,7 +21,7 @@
   },
   "keywords": [
     "order POC",
-    "Hands on RESTful Web Services with TypeScript 3",
+    "Hands on RESTful APIs with TypeScript 3",
     "TypeScript 3",
     "Packt Books"
   ],
@@ -43,6 +43,7 @@
     "@types/passport-jwt": "^3.0.1",
     "@types/passport-local": "^1.0.33",
     "@types/winston": "^2.4.4",
+    "@types/mongoose-unique-validator": "^1.0.1",
     "chai": "^4.2.0",
     "cross-env": "^5.2.0",
     "mocha": "^5.2.0",
@@ -69,6 +70,7 @@
     "mongoose": "^5.4.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "mongoose-unique-validator": "^2.0.2",
     "passport-local": "^1.0.0",
     "winston": "^3.1.0"
   }

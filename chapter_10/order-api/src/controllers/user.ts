@@ -13,6 +13,9 @@ export let getUser = (req: Request, res: Response, next: NextFunction) => {
 
   UserModel.findOne({ username: username }, (err, user) => {
     if (!user) {
+      OrderAPILogger.logger.info(
+        `[GET] [/users/:{username}] user with username ${username} not found`
+      )
       return res.status(404).send()
     }
 
@@ -32,6 +35,14 @@ export let addUser = (req: Request, res: Response, next: NextFunction) => {
   newUser.password = bcrypt.hashSync(newUser.password, 10)
 
   newUser.save((error, user) => {
+    if (error) {
+      OrderAPILogger.logger.info(
+        `[POST] [/users] something went wrong when saveing a new user ${
+          newUser.username
+        } | ${error.message}`
+      )
+      return res.status(500).send(error)
+    }
     user = halson(user.toJSON()).addLink('self', `/users/${user._id}`)
     return formatOutput(res, user, 201, 'user')
   })
@@ -44,6 +55,9 @@ export let updateUser = (req: Request, res: Response, next: NextFunction) => {
 
   UserModel.findOne({ username: username }, (err, user) => {
     if (!user) {
+      OrderAPILogger.logger.info(
+        `[PATCH] [/users/:{username}] user with username ${username} not found`
+      )
       return res.status(404).send()
     }
 
@@ -68,6 +82,9 @@ export let removeUser = (req: Request, res: Response, next: NextFunction) => {
 
   UserModel.findOne({ username: username }, (err, user) => {
     if (!user) {
+      OrderAPILogger.logger.info(
+        `[DELETE] [/users/:{username}] user with username ${username} not found`
+      )
       return res.status(404).send()
     }
 
@@ -81,10 +98,11 @@ export let login = (req: Request, res: Response, next: NextFunction) => {
   const username = req.query.username
   const password = req.query.password
 
-  OrderAPILogger.logger.info(`[GET] [/users/login] ${username}`)
-
   UserModel.findOne({ username: username }, (err, user) => {
     if (!user) {
+      OrderAPILogger.logger.info(
+        `[GET] [/users/login] no user found with the username ${username}`
+      )
       return res.status(404).send()
     }
 
@@ -97,6 +115,9 @@ export let login = (req: Request, res: Response, next: NextFunction) => {
 
       return res.json({ token: token })
     } else {
+      OrderAPILogger.logger.info(
+        `[GET] [/users/login] user not authorized ${username}`
+      )
       return res.status(401).send()
     }
   })
