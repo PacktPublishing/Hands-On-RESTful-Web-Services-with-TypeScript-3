@@ -37,6 +37,7 @@
     "@types/mocha": "^5.2.5",
     "@types/mongodb": "^3.1.17",
     "@types/mongoose": "^5.3.5",
+    "@types/mongoose-unique-validator": "^1.0.1",
     "@types/node": "^10.12.12",
     "@types/passport": "^0.4.7",
     "@types/passport-jwt": "^3.0.1",
@@ -64,6 +65,7 @@
     "js2xmlparser": "^3.0.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.0",
+    "mongoose-unique-validator": "^2.0.2",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
