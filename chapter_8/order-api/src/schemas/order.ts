@@ -5,7 +5,7 @@ import { OrderStatus } from '../models/orderStatus'
 export interface OrderModel extends Order, Document {}
 
 export const OrderSchema: Schema = new Schema({
-  userId: Number,
+  userId: { type: Schema.Types.ObjectId, ref: 'User' },
   quantity: Number,
   shipDate: Date,
   status: { type: String, enum: ['PLACED', 'APPROVED', 'DELIVERED'] },

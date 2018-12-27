@@ -1,7 +1,7 @@
 {
   "name": "order-api",
   "version": "1.0.0",
-  "description": "This is the example from the Book Hands on RESTful Web Services with TypeScript 3",
+  "description": "This is the example from the Book Hands on RESTful APIs with TypeScript 3",
   "main": "./dist/server.js",
   "scripts": {
     "build": "npm run clean && tsc",
@@ -21,7 +21,7 @@
   },
   "keywords": [
     "order POC",
-    "Hands on RESTful Web Services with TypeScript 3",
+    "Hands on RESTful APIs with TypeScript 3",
     "TypeScript 3",
     "Packt Books"
   ],

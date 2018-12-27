@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import * as halson from 'halson'
 import * as _ from 'lodash'
 import { OrderModel } from '../schemas/order'
+import { UserModel } from '../schemas/User'
 import { formatOutput } from '../utility/orderApiUtility'
 
 export let getOrder = (req: Request, res: Response, next: NextFunction) => {
@@ -34,16 +35,24 @@ export let getAllOrders = (req: Request, res: Response, next: NextFunction) => {
 }
 
 export let addOrder = (req: Request, res: Response, next: NextFunction) => {
-  const newOrder = new OrderModel(req.body)
+  const userId = req.body.userId
 
-  newOrder.save((err, order) => {
-    order = halson(order.toJSON())
-      .addLink('self', `/store/orders/${order._id}`)
-      .addLink('user', {
-        href: `/users/${order.userId}`,
-      })
+  UserModel.findById(userId, (err, user) => {
+    if (!user) {
+      return res.status(404).send()
+    }
 
-    return formatOutput(res, order, 201, 'order')
+    const newOrder = new OrderModel(req.body)
+
+    newOrder.save((error, order) => {
+      order = halson(order.toJSON())
+        .addLink('self', `/store/orders/${order._id}`)
+        .addLink('user', {
+          href: `/users/${order.userId}`,
+        })
+
+      return formatOutput(res, order, 201, 'order')
+    })
   })
 }
 

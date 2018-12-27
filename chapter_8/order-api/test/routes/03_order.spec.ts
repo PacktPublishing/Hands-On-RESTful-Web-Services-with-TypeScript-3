@@ -36,10 +36,32 @@ describe('userRoute', () => {
         expect(res.status).to.be.equal(404)
       })
   })
+
+  it('should create a new user for Order tests and retrieve it back', async () => {
+    const user = {
+      username: 'OrderUser',
+      firstName: 'Order',
+      lastName: 'User',
+      email: 'order@myemail.com',
+      password: 'password',
+      phone: '5555555',
+      userStatus: 1,
+    }
+    return chai
+      .request(app)
+      .post('/users')
+      .send(user)
+      .then(res => {
+        expect(res.status).to.be.equal(201)
+        expect(res.body.username).to.be.equal(user.username)
+        order.userId = res.body._id
+      })
+  })
+
   it('should create a new order and retrieve it back', async () => {
     return chai
       .request(app)
-      .post('/store/orders')
+      .post(`/store/orders`)
       .send(order)
       .then(res => {
         expect(res.status).to.be.equal(201)
@@ -82,7 +104,7 @@ describe('userRoute', () => {
       .get(`/store/inventory?status=PLACED`)
       .then(res => {
         expect(res.status).to.be.equal(200)
-        expect(res.body[20].length).to.be.equal(1)
+        expect(res.body[order.userId].length).to.be.equal(1)
       })
   })
   it('should remove an existing order', async () => {
