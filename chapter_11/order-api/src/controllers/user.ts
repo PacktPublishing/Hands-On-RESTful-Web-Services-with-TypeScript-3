@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt'
 import { NextFunction, Request, Response } from 'express'
 import * as halson from 'halson'
 import * as jwt from 'jsonwebtoken'
-import { UserModel } from '../schemas/User'
+import { UserModel } from '../schemas/user'
 import { OrderAPILogger } from '../utility/logger'
 import { formatOutput } from '../utility/orderApiUtility'
 

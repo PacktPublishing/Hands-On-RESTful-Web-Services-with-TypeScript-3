@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import * as halson from 'halson'
 import * as _ from 'lodash'
 import { OrderModel } from '../schemas/order'
-import { UserModel } from '../schemas/User'
+import { UserModel } from '../schemas/user'
 import { OrderAPILogger } from '../utility/logger'
 import { formatOutput } from '../utility/orderApiUtility'
 
