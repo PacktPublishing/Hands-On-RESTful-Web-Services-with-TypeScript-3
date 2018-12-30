@@ -30,7 +30,7 @@
   "author": "Biharck Muniz Araújo",
   "license": "MIT",
   "devDependencies": {
-    "@types/bcrypt": "^3.0.0",
+    "@types/bcrypt": "3.0.0",
     "@types/body-parser": "^1.17.0",
     "@types/chai": "^4.1.7",
     "@types/chai-http": "^3.0.5",
@@ -48,7 +48,7 @@
   "dependencies": {
     "@google-cloud/storage": "^2.3.4",
     "@types/node": "^10.12.12",
-    "bcrypt": "^3.0.2",
+    "bcrypt": "3.0.0",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
