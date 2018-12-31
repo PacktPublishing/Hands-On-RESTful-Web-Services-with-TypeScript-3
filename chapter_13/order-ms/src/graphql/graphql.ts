@@ -1,4 +1,6 @@
-import { ApolloServer, gql } from 'apollo-server-express'
+import { ApolloServer } from 'apollo-server-express'
+import { OrderGraphQLResolvers } from './resolvers'
+import { OrderGraphQLTypes } from './types'
 
 export class GraphQL {
   public typeDefs: string
@@ -6,17 +8,8 @@ export class GraphQL {
   public server: ApolloServer
 
   constructor() {
-    this.typeDefs = gql`
-      type Query {
-        hello: String
-      }
-    `
-
-    this.resolvers = {
-      Query: {
-        hello: () => 'Hello world!',
-      },
-    }
+    this.typeDefs = new OrderGraphQLTypes().getTypes()
+    this.resolvers = new OrderGraphQLResolvers().getResolvers()
 
     this.server = new ApolloServer({
       typeDefs: this.typeDefs,
