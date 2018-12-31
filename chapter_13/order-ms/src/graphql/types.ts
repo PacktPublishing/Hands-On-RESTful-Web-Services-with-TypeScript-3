@@ -14,6 +14,14 @@ export class OrderGraphQLTypes {
         allOrders: [Order]!
         listByOrderId(id: ID): Order!
       }
+      type Mutation {
+        createOrder(
+          userId: Int!
+          quantity: Int!
+          status: String!
+          complete: Boolean!
+        ): Order
+      }
     `
   }
 }

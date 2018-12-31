@@ -9,6 +9,12 @@ export class OrderGraphQLResolvers {
           return await OrderModel.findById({ _id: args.id })
         },
       },
+      Mutation: {
+        createOrder: async (root, args) => {
+          const newOrder = new OrderModel(args)
+          return await newOrder.save()
+        },
+      },
     }
   }
 }
