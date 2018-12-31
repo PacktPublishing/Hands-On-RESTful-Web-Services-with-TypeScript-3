@@ -1,1 +1,1 @@
-##The code for this repository is under development
+Hands-On RESTful Web Services with TypeScript 3, published by Packt
