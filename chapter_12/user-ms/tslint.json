@@ -1,0 +1,14 @@
+{
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "rules": {
+    "array-type": [true, "generic"],
+    "no-string-literal": false,
+    "object-literal-shorthand": [true, "never"],
+    "only-arrow-functions": true,
+    "interface-name": false,
+    "max-classes-per-file": false,
+    "no-var-requires": false,
+    "ban-types": false,
+    "object-literal-sort-keys": false
+  }
+}

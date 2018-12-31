@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- '10'
+sudo: required
+services:
+- docker
+- mongodb
+script:
+- npm run test
+deploy:
+  provider: gae
+  project: user-ms-227100
+  keyfile: gce.json
+  skip_cleanup: true
+  verbosity: debug
+  on: master
+before_install:
+- openssl aes-256-cbc -K $encrypted_97423555e074_key -iv $encrypted_97423555e074_iv
+  -in gce.json.enc -out gce.json -d

@@ -1,0 +1,18 @@
+runtime: custom
+env: flex
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+endpoints_api_service:
+  #remeber to replace the name with your project id
+  name: user-ms-227100.appspot.com
+  rollout_strategy: managed
+liveness_check:
+  path: '/api'
+  check_interval_sec: 30
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2

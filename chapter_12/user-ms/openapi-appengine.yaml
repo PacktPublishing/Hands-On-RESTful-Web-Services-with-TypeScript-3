@@ -1,0 +1,158 @@
+# [START swagger]
+swagger: '2.0'
+info:
+  description: User Microservice
+  title: User Microservice
+  version: 1.0.0
+host: user-ms-227100.appspot.com
+# [END swagger]
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/xml
+schemes:
+  - https
+  - http
+paths:
+  /api:
+    get:
+      tags:
+        - api
+      description: Returns a default api message
+      operationId: getApi
+      security:
+        - api_key: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: successful operation
+  /users:
+    post:
+      tags:
+        - store
+      summary: Create a user
+      operationId: addUser
+      produces:
+        - 'application/json'
+      responses:
+        201:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Invalid User
+      security:
+        - api_key: []
+      parameters:
+        - description: User information
+          in: body
+          name: message
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+  /users/{username}:
+    get:
+      tags:
+        - store
+      summary: Find user by username
+      operationId: getUser
+      produces:
+        - 'application/json'
+        - 'application/xml'
+      responses:
+        201:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Invalid ID supplied
+        404:
+          description: User not found
+      security:
+        - api_key: []
+      parameters:
+        - in: path
+          name: username
+          type: string
+          required: true
+          description: username of the user to get.
+    patch:
+      tags:
+        - store
+      summary: Update the user with the specified username.
+      operationId: updateUser
+      responses:
+        204:
+          description: User was updated.
+        400:
+          description: Invalid ID supplied
+        404:
+          description: User not found
+      security:
+        - api_key: []
+      parameters:
+        - in: path
+          name: username
+          type: string
+          required: true
+          description: username of the user to update.
+        - in: body
+          name: message
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+    delete:
+      tags:
+        - store
+      summary: Deletes the user with the specified username.
+      operationId: removeUser
+      responses:
+        204:
+          description: User was deleted.
+        400:
+          description: Invalid ID supplied
+        404:
+          description: User not found
+      security:
+        - api_key: []
+      parameters:
+        - in: path
+          name: username
+          type: string
+          required: true
+          description: username of the user to delete.
+definitions:
+  User:
+    type: object
+    properties:
+      _id:
+        type: integer
+        format: int64
+      username:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+    xml:
+      name: User
+# This section requires all requests to any path to require an API key.
+security:
+  - api_key: []
+securityDefinitions:
+  api_key:
+    type: 'apiKey'
+    name: 'key'
+    in: 'query'
