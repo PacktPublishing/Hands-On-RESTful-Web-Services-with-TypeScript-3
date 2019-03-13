@@ -1,6 +1,6 @@
 export class Queue<T> {
 
-    _store: T[] = [];
+    private _store: T[] = [];
 
     constructor(initialData: Array<T> = []) {
         this._store.push(...initialData)
