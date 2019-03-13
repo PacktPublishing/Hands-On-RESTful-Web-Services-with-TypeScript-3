@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { Queue } from '../src/app';
 
-describe('Stack', () => {
+describe('Queue', () => {
     it('should be able to be initialized without an initializer', () => {
         const s = new Queue<number>();
         expect(s.size()).to.equal(0);
