@@ -33,8 +33,6 @@ describe('userRoute', async () => {
       newUser.password = bcrypt.hashSync(newUser.password, 10)
       
       newUser.save(async (error, userCreated) => {
-        // tslint:disable-next-line:no-console
-        console.log('criou')
         user._id = userCreated._id
         done()
       })
@@ -153,5 +151,5 @@ describe('userRoute', async () => {
         expect(res.status).to.be.equal(404)
       })
   })
-  
+
 })
