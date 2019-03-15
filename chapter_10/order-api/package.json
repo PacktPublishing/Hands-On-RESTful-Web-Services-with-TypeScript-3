@@ -63,6 +63,7 @@
     "bcrypt": "3.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "chai-http": "^4.2.1",
     "express-winston": "^3.0.1",
     "halson": "^3.0.0",
     "js2xmlparser": "^3.0.0",
