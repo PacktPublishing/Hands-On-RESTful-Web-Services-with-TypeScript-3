@@ -4,20 +4,20 @@ import * as chai from 'chai'
 import chaiHttp = require('chai-http')
 import 'mocha'
 import app from '../../src/app'
-import { UserModel } from '../../src/schemas/user'
+import { UserModel } from '../../src/schemas/User'
 import { OrderAPILogger } from '../../src/utility/logger'
 
 chai.use(chaiHttp)
 
 const expect = chai.expect
 
-describe('userRoute', () => {
+describe('userRoute', async () => {
   const user = {
     _id: null,
     username: 'John',
     firstName: 'John',
     lastName: 'Doe',
-    email: 'John@memail.com',
+    email: 'John@myemail.com',
     password: 'password',
     phone: '5555555',
     userStatus: 1,
@@ -25,24 +25,26 @@ describe('userRoute', () => {
 
   let token
 
-  before(async () => {
+  before((done) => {
     expect(UserModel.modelName).to.be.equal('User')
-    const newUser = new UserModel(user)
-    newUser.email = 'unique_email@email.com'
 
-    newUser.password = bcrypt.hashSync(newUser.password, 10)
+    UserModel.db.db.dropCollection('users', async (err, result) => {
+      
+      const newUser = new UserModel(user)
+      newUser.password = bcrypt.hashSync(newUser.password, 10)
+      
+      OrderAPILogger.logger.info(
+        'calling save to create a default user for loging'
+      )
 
-    OrderAPILogger.logger.info(
-      'calling save to create a default user for loging'
-    )
-    await newUser.save().then(async userCreated => {
-      OrderAPILogger.logger.info('creating the default user')
-      user._id = userCreated._id
+      newUser.save(async (error, userCreated) => {
+        user._id = userCreated._id
+        done()
+      })
     })
   })
 
-  it('should be able to login', async () => {
-    OrderAPILogger.logger.info('getting the login')
+  it('should be able to login', () => {     
     return chai
       .request(app)
       .get(`/users/login?username=${user.username}&password=${user.password}`)
@@ -52,7 +54,7 @@ describe('userRoute', () => {
       })
   })
 
-  it('should respond with HTTP 404 status because there is no user', async () => {
+  it('should respond with HTTP 404 status because there is no user', () => {
     return chai
       .request(app)
       .get(`/users/NO_USER`)
@@ -61,7 +63,8 @@ describe('userRoute', () => {
         expect(res.status).to.be.equal(404)
       })
   })
-  it('should create a new user and retrieve it back', async () => {
+  it('should create a new user and retrieve it back', () => {
+    user.email = 'unique_email@email.com'
     return chai
       .request(app)
       .post('/users')
@@ -72,7 +75,7 @@ describe('userRoute', () => {
         expect(res.body.username).to.be.equal(user.username)
       })
   })
-  it('should return the user created on the step before', async () => {
+  it('should return the user created on the step before', () => {
     return chai
       .request(app)
       .get(`/users/${user.username}`)
@@ -82,7 +85,7 @@ describe('userRoute', () => {
         expect(res.body.username).to.be.equal(user.username)
       })
   })
-  it('should updated the user John', async () => {
+  it('should updated the user John', () => {
     user.username = 'John_Updated'
     user.firstName = 'John Updated'
     user.lastName = 'Doe Updated'
@@ -100,7 +103,7 @@ describe('userRoute', () => {
         expect(res.status).to.be.equal(204)
       })
   })
-  it('should return the user updated on the step before', async () => {
+  it('should return the user updated on the step before', () => {
     return chai
       .request(app)
       .get(`/users/${user.username}`)
@@ -116,7 +119,7 @@ describe('userRoute', () => {
         expect(res.body.userStatus).to.be.equal(user.userStatus)
       })
   })
-  it('should return 404 because the user does not exist', async () => {
+  it('should return 404 because the user does not exist', () => {
     user.firstName = 'Mary Jane'
 
     return chai
@@ -128,7 +131,7 @@ describe('userRoute', () => {
         expect(res.status).to.be.equal(404)
       })
   })
-  it('should remove an existent user', async () => {
+  it('should remove an existent user', () => {
     return chai
       .request(app)
       .del(`/users/${user.username}`)
@@ -137,7 +140,7 @@ describe('userRoute', () => {
         expect(res.status).to.be.equal(204)
       })
   })
-  it('should return 404 when it is trying to remove an user because the user does not exist', async () => {
+  it('should return 404 when it is trying to remove an user because the user does not exist', () => {
     return chai
       .request(app)
       .del(`/users/Mary`)
