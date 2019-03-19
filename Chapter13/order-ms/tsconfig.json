@@ -3,6 +3,7 @@
     "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
     "lib": ["es6", "dom"],
     "target": "es6", //default is es5
     "module": "commonjs", //CommonJs style module in output

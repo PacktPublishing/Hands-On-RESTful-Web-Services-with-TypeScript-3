@@ -1,7 +1,8 @@
+import { IResolvers } from 'graphql-tools';
 import { OrderModel } from '../schemas/order'
 
 export class OrderGraphQLResolvers {
-  public getResolvers(): Object {
+  public getResolvers(): IResolvers {
     return {
       Query: {
         allOrders: async () => await OrderModel.find({}),

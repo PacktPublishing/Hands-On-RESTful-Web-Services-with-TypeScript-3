@@ -1,10 +1,11 @@
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer, IResolvers } from 'apollo-server-express'
+import { DocumentNode } from 'graphql';
 import { OrderGraphQLResolvers } from './resolvers'
 import { OrderGraphQLTypes } from './types'
 
 export class GraphQL {
-  public typeDefs: string
-  public resolvers: Object
+  public typeDefs: DocumentNode
+  public resolvers: IResolvers
   public server: ApolloServer
 
   constructor() {

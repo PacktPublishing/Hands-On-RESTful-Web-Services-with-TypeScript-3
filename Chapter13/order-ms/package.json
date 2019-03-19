@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@google-cloud/storage": "^2.3.4",
+    "@types/graphql": "^14.0.7",
     "@types/node": "^10.12.12",
     "apollo-server-express": "^2.3.1",
     "body-parser": "^1.18.3",
@@ -54,7 +55,7 @@
     "express": "^4.16.4",
     "express-winston": "^3.0.1",
     "graphql": "^14.0.2",
-    "graphql-tools": "^4.0.3",
+    "graphql-tools": "^4.0.4",
     "halson": "^3.0.0",
     "js2xmlparser": "^3.0.0",
     "lodash": "^4.17.11",

@@ -1,7 +1,8 @@
 import { gql } from 'apollo-server-express'
+import { DocumentNode } from 'graphql'
 
 export class OrderGraphQLTypes {
-  public getTypes(): string {
+  public getTypes(): DocumentNode {
     return gql`
       type Order {
         id: ID!
