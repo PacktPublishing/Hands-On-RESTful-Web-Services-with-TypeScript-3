@@ -1,3 +1,8 @@
+## $5 Tech Unlocked 2021!
+[Buy and download this Book for only $5 on PacktPub.com](https://www.packtpub.com/product/hands-on-restful-web-services-with-typescript-3/9781789956276)
+-----
+*If you have read this book, please leave a review on [Amazon.com](https://www.amazon.com/gp/product/1789956277).     Potential readers can then use your unbiased opinion to help them make purchase decisions. Thank you. The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
+
 # Hands-On RESTful Web Services with TypeScript 3
 
 <a href="https://www.packtpub.com/application-development/hands-restful-web-services-typescript-3?utm_source=github&utm_medium=repository&utm_campaign=9781789956276 "><img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B13139_Mockupcover.png" alt="Hands-On RESTful Web Services with TypeScript 3" height="256px" align="right"></a>
