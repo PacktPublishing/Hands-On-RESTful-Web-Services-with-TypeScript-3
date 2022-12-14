@@ -1,3 +1,15 @@
+
+### Get this product for $5
+
+<i>Packt is having its biggest sale of the year. Get this eBook or any other book, video, or course that you like just for $5 each</i>
+
+
+<b><p align='center'>[Buy now](https://packt.link/9781789956276)</p></b>
+
+
+<b><p align='center'>[Buy similar titles for just $5](https://subscription.packtpub.com/search)</p></b>
+
+
 # Hands-On RESTful Web Services with TypeScript 3
 
 <a href="https://www.packtpub.com/application-development/hands-restful-web-services-typescript-3?utm_source=github&utm_medium=repository&utm_campaign=9781789956276 "><img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B13139_Mockupcover.png" alt="Hands-On RESTful Web Services with TypeScript 3" height="256px" align="right"></a>
